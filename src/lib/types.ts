@@ -3,5 +3,5 @@ export type User = {
 	email: string;
 	firstName: string;
 	lastName: string;
-	emailConfirmed: boolean;
+	confirmedEmail: boolean;
 };

@@ -1,25 +1,42 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import type { User } from '$lib/types';
 	import type { LayoutData } from './$types';
-	let user: User;
+	import { setContext } from 'svelte';
+	import { writable } from 'svelte/store';
+	import Cookies from 'js-cookie';
 
 	export let data: LayoutData;
-	if (data.token) {
-		user = jwtDecodeUser(data.token);
+	const tokenStore = writable<string>();
+	setContext('token', tokenStore);
+	let user: User;
+
+	tokenStore.subscribe((jwt) => {
+		if (jwt) {
+			user = jwtDecodeUser(jwt);
+			if (browser) {
+				Cookies.set('token', jwt);
+			}
+		}
+	});
+
+	$: {
+		if (data.token) {
+			tokenStore.set(data.token);
+		}
 	}
 
 	function jwtDecodeUser(jwt: string) {
-		let payload: {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			[key: string]: any;
-		} = JSON.parse(window.atob(jwt.split('.')[1]));
+		let { id, email, firstName, lastName, confirmedEmail }: User = JSON.parse(
+			window.atob(jwt.split('.')[1])
+		);
 
 		let user: User = {
-			id: payload.ID,
-			email: payload.EMAIL,
-			firstName: payload.F_NAME,
-			lastName: payload.L_NAME,
-			emailConfirmed: payload.EMAIL_CONFIRMED === 1 ? true : false
+			id,
+			email,
+			firstName,
+			lastName,
+			confirmedEmail
 		};
 		return user;
 	}
