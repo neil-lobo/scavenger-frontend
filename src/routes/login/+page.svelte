@@ -1,22 +1,22 @@
 <script lang="ts">
-	import { PUBLIC_API_URL } from '$env/static/public';
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
+	import { PUBLIC_API_URL } from "$env/static/public";
+	import { getContext } from "svelte";
+	import type { Writable } from "svelte/store";
 
-	const loginUrl = new URL('login', PUBLIC_API_URL);
+	const loginUrl = new URL("login", PUBLIC_API_URL);
 
-	let email = '';
-	let password = '';
-	const token = getContext<Writable<string>>('token');
+	let email = "";
+	let password = "";
+	const token = getContext<Writable<string>>("token");
 
 	async function attemptLogin() {
-		console.log('login');
-		if (email === '' || password === '') return;
+		console.log("login");
+		if (email === "" || password === "") return;
 
 		const res = await fetch(loginUrl, {
-			method: 'POST',
+			method: "POST",
 			headers: {
-				'content-type': 'application/json'
+				"content-type": "application/json"
 			},
 			body: JSON.stringify({
 				email,

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
+	import { getContext } from "svelte";
+	import type { Writable } from "svelte/store";
 
-	const token = getContext<Writable<string>>('token');
+	const token = getContext<Writable<string>>("token");
 
 	function logout() {
-		token.set('');
+		token.set("");
 	}
 </script>
 
