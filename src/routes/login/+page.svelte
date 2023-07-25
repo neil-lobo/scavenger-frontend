@@ -10,7 +10,6 @@
 	const token = getContext<Writable<string>>("token");
 
 	async function attemptLogin() {
-		console.log("login");
 		if (email === "" || password === "") return;
 
 		const res = await fetch(loginUrl, {
@@ -26,7 +25,6 @@
 
 		if (res.status === 200) {
 			const json = await res.json();
-			console.log(json);
 			token.set(json.token);
 		} else {
 			console.log(res.status);
