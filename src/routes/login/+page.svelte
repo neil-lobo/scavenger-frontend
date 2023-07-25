@@ -27,7 +27,10 @@
 			const json = await res.json();
 			token.set(json.token);
 		} else {
+			email = "";
+			password = "";
 			console.log(res.status);
+			console.log(await res.json());
 		}
 	}
 </script>

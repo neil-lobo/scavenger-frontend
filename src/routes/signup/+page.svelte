@@ -40,6 +40,12 @@
 		if (res.status === 200) {
 			goto("/");
 		} else {
+			firstName = "";
+			lastName = "";
+			email = "";
+			password = "";
+			confirmPassword = "";
+
 			console.log(res.status);
 			console.log(await res.json());
 		}

@@ -6,7 +6,7 @@
 
 	const confirmUrl = new URL("confirm", PUBLIC_API_URL);
 
-    export let data: PageData;
+	export let data: PageData;
 	let code = "";
 
 	async function confirmEmail() {
@@ -25,18 +25,19 @@
 		if (res.status === 200) {
 			goto("/login");
 		} else {
+			code = "";
 			console.log(res.status);
-            console.log(await res.json());
+			console.log(await res.json());
 		}
 	}
 
-    onMount(() => {
-        const paramCode = data.searchParams.get("code");
-        if (paramCode) {
-            code = paramCode;
-            confirmEmail();
-        }
-    })
+	onMount(() => {
+		const paramCode = data.searchParams.get("code");
+		if (paramCode) {
+			code = paramCode;
+			confirmEmail();
+		}
+	});
 </script>
 
 <h1>Confim</h1>
