@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from "$app/navigation";
 	import { getContext } from "svelte";
 	import type { Writable } from "svelte/store";
 
@@ -6,6 +7,7 @@
 
 	function logout() {
 		token.set("");
+		goto("/");
 	}
 </script>
 
