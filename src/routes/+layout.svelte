@@ -9,9 +9,16 @@
 	export let data: LayoutData;
 	const tokenStore = writable<string>();
 	setContext('token', tokenStore);
-	let user: User;
+	let user: User | undefined;
 
 	tokenStore.subscribe((jwt) => {
+		if (jwt === '') {
+			user = undefined;
+			if (browser) {
+				Cookies.remove('token');
+			}
+		}
+
 		if (jwt) {
 			user = jwtDecodeUser(jwt);
 			if (browser) {
@@ -45,8 +52,8 @@
 <nav>
 	<a href="/">Home</a>
 	<a href="/login">Login</a>
-	<!-- <a href="/signup">Signup</a>
-    <a href="/logout">Logout</a> -->
+	<!-- <a href="/signup">Signup</a> -->
+	<a href="/logout">Logout</a>
 	{JSON.stringify(user) ?? 'no token'}
 </nav>
 
