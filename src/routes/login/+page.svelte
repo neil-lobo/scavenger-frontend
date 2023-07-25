@@ -36,7 +36,7 @@
 
 <div class="input-container">
 	<label for="email">Email:</label>
-	<input type="email" name="email" id="email" bind:value={email} />
+	<input type="text" name="email" id="email" bind:value={email} />
 </div>
 <div class="input-container">
 	<label for="password">Password:</label>

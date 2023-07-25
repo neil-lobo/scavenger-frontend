@@ -52,7 +52,7 @@
 <nav>
 	<a href="/">Home</a>
 	<a href="/login">Login</a>
-	<!-- <a href="/signup">Signup</a> -->
+	<a href="/signup">Signup</a>
 	<a href="/logout">Logout</a>
 	{JSON.stringify(user) ?? "no token"}
 </nav>
